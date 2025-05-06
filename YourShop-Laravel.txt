@@ -1,0 +1,80 @@
+- Livewire strucrute use direct or as a component ....
+- Lifecycle of livewire and laravel both
+- Difference between yeild and stack , when use which
+- current versions of all technologies used
+- image upload
+- what is updated in laravel 11
+* varient table
+	pro_id
+	size
+	color
+	price
+	quantity
+	discount
+	- when click on the option for each then the section will be displayed
+	  * ex. : click on colors then the color option will be displayed
+
+can improve :
+	rating
+	discount
+	order tracking
+	coupon for discount/ first order discount
+	pay with QR-Code
+	multiple address (previous address option)
+	search in admin
+	
+
+YourShop :
+
+* availbale product changes(if product available or not = display)
+* index page dynamic / responsive
+
+* change admin alerts
+* open the category on click of slider img
+* add product to wishlist from the products page (card)
+* filter : (brands, price, color, category, size etc, in stock/not, trending.)(watch video downloaded)
+
+* generate slug automatically for (brand, category)
+* create readme file 
+
+* admin can manualy add color code
+* heart effect in add wishlist
+* display animation in product-view page
+* remove unused / un-wanted fields from form as well as database
+	- Quantity = product table
+	- Frontend/navbar.blade.php
+	- frontend folder = view/controller	
+	- unwanted pics
+
+
+Notes :
+
+1. We can use relationships using methods & property
+   * method
+	$product->productColors()
+   * property
+	$product->productColors
+   - In both case we need to define productColors() method in a model
+2. Active nav-tab :
+	{{request()->is('categories')?'active-nav':'in-active-nav'}}
+3. {!! $product->description !!} 
+	It's called "unescaped output" 
+	HTML tags within the description will be interpreted as HTML and rendered accordingly.
+4. Auth::check() 
+	- to check weather user is logged in or not!
+5. * <a href="#" targer="_blank"></a>
+	- openes every product in a new tab.
+   * <a href="#" targer="blank"></a>
+	- openes one single new tab for every product
+	- tab is same for all products
+6. WishList::where('user_id',auth()->user()->id)->where('product_id',$product_id)->exists()
+   * returns true or false
+   * use to check the row in table
+7. date('d / m / Y') 
+   * For current date
+8. Route::get('/home','HomeController@index')->name('index');
+   * use to call the index method of home controller using route name ('index')
+9. store image 
+   *  $imageName = $this->image->store('public');
+10. Request::get('search')  
+   * get the value of search form the url

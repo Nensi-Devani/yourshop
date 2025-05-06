@@ -1,0 +1,39 @@
+*{
+    --dark-blue: #0F2573;
+    --medium-blue: #19427D;
+    --light-blue: #1FA3D4;
+    /* background-color: #152B6F; */
+    /* background-color: #0F2573; */
+    /* --light-blue: #018ABE; */
+}
+.bg-blue{
+    background-color: rgb(23, 23, 202);
+}
+.product-edit-color{
+    max-height: 300px;
+    overflow-y: scroll;
+}
+.product-edit-color::-webkit-scrollbar {
+    width: 5px;
+}
+.product-edit-color::-webkit-scrollbar-track{
+    background-color: rgba(176, 222, 241, 0.491);
+}
+.product-edit-color::-webkit-scrollbar-thumb{
+    background-color: rgba(0, 0, 255, 0.525);
+}
+.color-select{
+    position: relative;
+    border: 2px solid var(--dark-blue);
+}
+.color-select::after{
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background-color:  var(--dark-blue);
+    right: 0;
+    top: -2px;
+    border-radius: 50%;
+}
+

@@ -1,0 +1,149 @@
+{{-- add brand form --}}
+@if ($add)
+<div wire:ignore.self class="modal show fade" style="display: inline-block;background:rgba(0, 0, 0, 0.8)" id="addBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+          <button wire:click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        {{-- pre loader --}}
+        <div wire:loading>
+            <div class="d-flex justify-content-center m-5">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+        </div>
+        <div wire:loading.remove>
+            <form wire:submit.prevent="addBrand">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="">Category <span class="text-danger">*</span></label>
+                        <select wire:model="category" class="form-select mt-1">
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $item)
+                                <option value="{{$item->id}}">{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        @error('category')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Brand Name <span class="text-danger">*</span></label>
+                        <input type="text" wire:model="name" class="form-control" placeholder="XYZ">
+                        @error('name')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Slug <span class="text-danger">*</span></label>
+                        <input type="text" wire:model="slug" class="form-control" placeholder="xyz">
+                        @error('slug')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Status</label>
+                        <div class="form-check form-switch">
+                            <input wire:model="status" class="form-check-input form-control mx-auto" type="checkbox" {{$status==1?'checked':''}}>
+                        </div>
+                        @error('status')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button wire:click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn bg-blue text-light">Save</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+@endif
+
+@if ($update)
+{{-- edit brand form --}}
+<div wire:ignore.self class="modal fade show" style="display: inline-block;background:rgba(0, 0, 0, 0.8)" id="editBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Brand</h5>
+          <button wire:click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div wire:loading> {{-- pre loader --}}
+            <div class="d-flex justify-content-center m-5">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+        </div>
+        <div wire:loading.remove>
+            <form wire:submit.prevent="updateBrand">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="">Category <span class="text-danger">*</span></label>
+                        <select wire:model="category" class="form-select mt-1">
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $item)
+                                <option value="{{$item->id}}" {{$category == $item->id?'selected':''}}>{{$item->name}}</option>
+                            @endforeach
+                        </select>
+                        @error('category')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Brand Name <span class="text-danger">*</span></label>
+                        <input type="text" wire:model.defer="name" class="form-control" placeholder="XYZ">
+                        @error('name')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Slug <span class="text-danger">*</span></label>
+                        <input type="text" wire:model.defer="slug" class="form-control" placeholder="xyz">
+                        @error('slug')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Status</label>
+                        <div class="form-check form-switch">
+                            <input wire:model="status" class="form-check-input form-control mx-auto" type="checkbox" {{$status==1?'checked':''}}>
+                        </div>
+                        @error('status')  <small class="text-danger">{{$message}}</small>  @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button wire:click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn bg-blue text-light">Update</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+@endif
+
+
+{{-- delete modal --}}
+@if ($delete)
+<div wire:ignore.self class="modal fade show" style="display: inline-block;background:rgba(0, 0, 0, 0.8)" id="editBrandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Brand</h5>
+          <button wire:click="closeModal" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div wire:loading> {{-- pre loader --}}
+            <div class="d-flex justify-content-center m-5">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+        </div>
+        <div wire:loading.remove>
+            <form wire:submit.prevent="destroyBrand">
+                <div class="modal-body">
+                    <p class="text-center">Are you sure, You want to delete this Brand ???</p>
+                </div>
+                <div class="modal-footer">
+                    <button wire:click="closeModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger text-light">Yes, Delete</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+@endif
